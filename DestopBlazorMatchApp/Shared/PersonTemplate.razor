@@ -1,0 +1,41 @@
+﻿<div class="container">
+    <div @key="Person" class=" row justify-content-start align-items-center">
+        <div class="col" @ondblclick="(()=>OnSelect.InvokeAsync(Person))">
+            <p style="font-size:x-large;margin-top:10px">@Person.Name @Person.LastName</p>
+        </div>
+        <div class="col col-auto">
+            @switch (ButtonType.ToLower())
+            {
+                case "create":
+                    <Button ButtonType="add" />
+                    break;
+                case "add":
+                    <Button ButtonType="add" Person="Person" OnClick="OnClick" />
+                    break;
+
+                case "delete":
+                    <Button ButtonType="delete" Person="Person" OnClick="OnClick" />
+                    break;
+
+                case "none":
+
+                    break;
+
+                case "add delete":
+                    <Button ButtonType="add" OnClick="OnClick" />
+                    <Button ButtonType="delete" OnClick="OnClick" />
+                    break;
+
+                default:
+                    break;
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Person Person { get; set; }
+    [Parameter] public EventCallback<Person> OnClick { get; set; }
+    [Parameter] public EventCallback<Person> OnSelect { get; set; }
+    [Parameter] public string ButtonType { get; set; }
+}

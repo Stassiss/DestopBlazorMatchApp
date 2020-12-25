@@ -1,0 +1,36 @@
+﻿
+
+@if (ButtonType.ToLower() == "delete")
+{
+    <button @ondblclick="(()=>OnClick.InvokeAsync(Person))" class="btn btn-danger btn-sm pr-1 pl-1 ml-1" style="font-size:small" title="Activates on doubleclick">Delete</button>
+
+}
+else if (ButtonType.ToLower() == "add")
+{
+    <button @onclick="(()=>OnClick.InvokeAsync(Person))" class="btn btn-secondary btn-sm pr-1 pl-1" style="font-size:small">Add</button>
+
+}
+else if (ButtonType.ToLower() == "create")
+{
+    <button type="submit" class="btn btn-success btn-sm pr-1 pl-1" style="font-size:small">Create</button>
+
+}
+else
+{
+    <p>
+        @ButtonType button does not exist!
+    </p>
+}
+@code {
+    /// <summary>
+    /// Input options:delete,add return delete button,add button
+    /// </summary>
+    [Parameter] public string ButtonType { get; set; }
+    [Parameter] public Person Person { get; set; }
+
+    [Parameter] public EventCallback<Person> OnClick { get; set; }
+
+
+
+
+}

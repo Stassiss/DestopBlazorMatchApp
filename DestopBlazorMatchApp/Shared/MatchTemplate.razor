@@ -1,0 +1,60 @@
+﻿<style>
+    .font {
+        font-size: x-large;
+    }
+
+    .img-size {
+        width: 45px;
+        height: 45px;
+    }
+
+    .margin {
+        margin-top: 10px;
+    }
+
+    .text-align-left {
+        text-align: left;
+    }
+
+    .text-align-right {
+        text-align: right;
+    }
+
+    .img-location {
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .backgraund {
+        background-color: lightpink;
+        margin: 10px;
+        border: hidden;
+        border-radius: 20px
+    }
+</style>
+
+<div class="container">
+    <div class="backgraund">
+        <div @key="Match" class=" row pl-4 pr-4 ">
+
+            <div class="col">
+                <p class="font margin text-align-right">@Match.Name</p>
+            </div>
+            <div class="col img-location">
+                <img src="Images/heart.png" class="img-size" />
+            </div>
+            <div class="col">
+                <p class="font margin text-align-left">@Match.Name</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@code {
+    [Parameter] public Person Match { get; set; }
+
+}

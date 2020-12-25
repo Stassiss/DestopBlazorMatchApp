@@ -1,7 +1,102 @@
 ﻿@page "/"
+@inject IPersonRepository personRepository
+@inject NavigationManager NavManager
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div>
+    <h1 style="text-align:center"> Home page</h1>
+    <PersonInputForm @ref="ChildComponent" OnValidSubmit="AddNewPerson" />
+    <div class="row">
+        <div class="col-4 pl-0 pr-0">
+            <GenericList List="MaleList" ListName="Male">
+                <ElementTemplate Context="person">
+                    <PersonTemplate ButtonType="delete" Person="person" OnClick="DeletePerson" OnSelect="GetPersonInfo">
+                    </PersonTemplate>
+                </ElementTemplate>
+            </GenericList>
+        </div>
+        <div class="col-4 pl-0 pr-0">
+            <GenericList List="MatchList" ListName="Matches">
+                <ElementTemplate Context="Match">
+                    <PersonTemplate Match="Match">
+                    </PersonTemplate>
+                </ElementTemplate>
+            </GenericList>
+        </div>
+
+        <div class="col-4 pl-0 pr-0">
+            <GenericList List="FemaleList" ListName="Female">
+                <ElementTemplate Context="person">
+                    <PersonTemplate ButtonType="delete" Person="person" OnClick="DeletePerson" OnSelect="GetPersonInfo">
+                    </PersonTemplate>
+                </ElementTemplate>
+            </GenericList>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<Person> MaleList { get; set; }
+    private List<Person> FemaleList { get; set; }
+    private List<Person> MatchList { get; set; }
+    protected PersonInputForm ChildComponent;
+
+    // Get both gender lists on render
+    protected override async Task OnInitializedAsync()
+    {
+
+        // Get  personData from WebApi
+        @*MaleList = await personRepository.GetMaleList();
+            FemaleList = await personRepository.GetFemaleList();
+            MatchList = new List<Person>();*@
+    }
+
+
+    private async void AddNewPerson(Person person)
+    {
+        @*try
+            {
+                await personRepository.CreateProject(person);
+
+                // Get  personData from WebApi
+                MaleList = await personRepository.GetMaleList();
+                FemaleList = await personRepository.GetFemaleList();
+                MatchList = await personRepository.GetPersonMatchDTOList();
+
+                ChildComponent.Refresh();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            StateHasChanged();*@
+    }
+
+    private async void DeletePerson(Person person)
+    {
+
+        @*try
+            {
+                await personRepository.DeletePerson(person.Id);
+                // Get  personData from WebApi
+                MaleList = await personRepository.GetMaleList();
+                FemaleList = await personRepository.GetFemaleList();
+                MatchList = await personRepository.GetPersonMatchDTOList();
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            StateHasChanged();*@
+    }
+    private void GetPersonInfo(Person person)
+    {
+
+        NavManager.NavigateTo($"/details/{person.Id}");
+    }
+
+}

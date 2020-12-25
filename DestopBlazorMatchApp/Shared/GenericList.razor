@@ -1,0 +1,50 @@
+﻿
+@typeparam TItem
+<div style="
+        border-bottom: solid 1px;
+        text-align: center;
+        border-top: solid 1px;
+        width: 100%;
+            ">
+    <h2>@ListName</h2>
+</div>
+@if (List == null)
+{
+    if (NullTemplate != null)
+    {
+        @NullTemplate
+    }
+    else
+    {
+        <p>Loading....</p>
+    }
+}
+else if (List.Count == 0)
+{
+    if (EmptyTemplate != null)
+    {
+        @EmptyTemplate
+    }
+    else
+    {
+        <text>List is empty </text>
+    }
+}
+else
+{
+    foreach (var element in List)
+    {
+        @ElementTemplate(element);
+    }
+}
+
+@code {
+    [Parameter] public List<TItem> List { get; set; }
+    [Parameter] public RenderFragment NullTemplate { get; set; }
+    [Parameter] public RenderFragment EmptyTemplate { get; set; }
+    [Parameter] public RenderFragment<TItem> ElementTemplate { get; set; }
+    [Parameter] public string ListName { get; set; }
+
+
+
+}
