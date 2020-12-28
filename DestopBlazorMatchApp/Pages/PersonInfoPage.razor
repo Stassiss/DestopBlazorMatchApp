@@ -6,7 +6,9 @@
 @if (SelectedPerson != null)
 {
     <div>
-        <h1 style="text-align:center">@SelectedPerson.Name Info page</h1>
+
+        <h1 style="text-align:center; margin-bottom:25px;">@SelectedPerson.Name @SelectedPerson.LastName</h1>
+
         <InfoPageDashbord @ref="ChildContent" SelectedPerson="SelectedPerson" AddLike="AddLikes" RemoveLike="RemoveLike" />
     </div>
 }
