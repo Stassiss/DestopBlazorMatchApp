@@ -1,20 +1,37 @@
 ﻿
 @typeparam TItem
-    <style>
-        .list-title {
-            border-bottom: solid 1px;
-            text-align: center;
-            height: auto;
-            width: 100%;
-            margin-top: 50px;
+<style>
+    .list-title {
+        text-align: center;
+        height: auto;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+        .list-title h2 {
+            margin-bottom: 0;
         }
 
-            .list-title h2 {
-                margin-bottom: 0;
-            }
-    </style>
+    .dots {
+        padding-top: 10px;
+        border-bottom: gray 15px dotted;
+        width: 150px;
+        margin-right: auto;
+        margin-left: auto;
+        opacity: 0.3;
+    }
+
+    .background {
+        padding: 20px;
+        margin: 20px;
+        border-radius: 30px;
+        background-color: rgba(218, 209, 209, 0.541);
+    }
+</style>
+<div class="background">
     <div class="list-title">
         <h2>@ListName</h2>
+        <div class="dots"></div>
     </div>
     @if (List == null)
     {
@@ -45,14 +62,14 @@
             @ElementTemplate(element);
         }
     }
+</div>
+@code {
+    [Parameter] public List<TItem> List { get; set; }
+    [Parameter] public RenderFragment NullTemplate { get; set; }
+    [Parameter] public RenderFragment EmptyTemplate { get; set; }
+    [Parameter] public RenderFragment<TItem> ElementTemplate { get; set; }
+    [Parameter] public string ListName { get; set; }
 
-    @code {
-        [Parameter] public List<TItem> List { get; set; }
-        [Parameter] public RenderFragment NullTemplate { get; set; }
-        [Parameter] public RenderFragment EmptyTemplate { get; set; }
-        [Parameter] public RenderFragment<TItem> ElementTemplate { get; set; }
-        [Parameter] public string ListName { get; set; }
 
 
-
-    }
+}

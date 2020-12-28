@@ -58,8 +58,28 @@ namespace DestopBlazorMatchApp.Repository
         }
         public void DeletePerson(Person person)
         {
+            DeletePersonFromLikes(person);
             PersonList.Remove(person);
             SavePersonList();
+        }
+        private void DeletePersonFromLikes(Person selectedPerson)
+        {
+            foreach (var oppositeSexPerson in PersonList.Where(x => x.IsMale != selectedPerson.IsMale))
+            {
+                foreach (var like in oppositeSexPerson.Likes)
+                {
+                    if (like.LikedPersonId.Equals(selectedPerson.Id))
+                    {
+                        var likeToBeRemoved = oppositeSexPerson.Likes.Find(x => x.SelectedPersonId == like.SelectedPersonId
+                                                                            && x.LikedPersonId == selectedPerson.Id);
+                        oppositeSexPerson.Likes.Remove(likeToBeRemoved);
+                        SavePersonList();
+                        break;
+                    }
+                }
+
+            }
+
         }
 
         public Person PersonInfo(int id)
