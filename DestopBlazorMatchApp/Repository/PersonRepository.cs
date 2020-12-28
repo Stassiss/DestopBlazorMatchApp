@@ -10,7 +10,7 @@ namespace DestopBlazorMatchApp.Repository
 {
     public class PersonRepository : IPersonRepository
     {
-        private const string filePath = @"C:\Users\STA\source\repos\DestopBlazorMatchApp\DestopBlazorMatchApp\Saves\person.json";
+        private const string filePath = @"wwwroot\Saves\person.json";
         private static string jsonString = File.ReadAllText(filePath);
         private static List<Person> PersonList = LoadSavedList();
         public List<Person> LoadPersonList(bool isMale)

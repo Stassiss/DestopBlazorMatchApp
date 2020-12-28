@@ -30,40 +30,45 @@
         align-content: center;
     }
 
+        .center-items .row {
+            margin-right: 0;
+        }
+
     .position-center-left {
         justify-content: start;
         align-content: center;
     }
 </style>
-
-<EditForm Model="Person" OnValidSubmit="(() => OnValidSubmit.InvokeAsync(Person))">
-    <DataAnnotationsValidator />
-    <div class=" row center-items">
-        <div class="row col col-auto">
-            <div class="col mb-2 ">
-                <InputText type="text" @bind-Value="@Person.Name" class="form-control name-input input-name-lenght" name="name" placeholder="@htmlPlaceHolderForName" />
-                <ValidationMessage For="@(() => Person.Name)" />
+<div >
+    <EditForm Model="Person" OnValidSubmit="(() => OnValidSubmit.InvokeAsync(Person))">
+        <DataAnnotationsValidator />
+        <div class=" row center-items">
+            <div class="row col col-auto">
+                <div class="col mb-2 ">
+                    <InputText type="text" @bind-Value="@Person.Name" class="form-control name-input input-name-lenght" name="name" placeholder="@htmlPlaceHolderForName" />
+                    <ValidationMessage For="@(() => Person.Name)" />
+                </div>
+                <div class="col mb-2 col-auto">
+                    <InputText type="text" @bind-Value="@Person.LastName" class="form-control name-input" name="name" placeholder="@htmlPlaceHolderForLastName" />
+                    <ValidationMessage For="@(() => Person.LastName)" />
+                </div>
             </div>
-            <div class="col mb-2 col-auto">
-                <InputText type="text" @bind-Value="@Person.LastName" class="form-control name-input" name="name" placeholder="@htmlPlaceHolderForLastName" />
-                <ValidationMessage For="@(() => Person.LastName)" />
+            <div class="row col position-center-left">
+                <div class="col col-auto">
+                    <input type="radio" name="isMale" checked="@isMale" @onchange="ChangeIsMale" />
+                    <label for="isMale">Male</label>
+                </div>
+                <div class="col col-auto">
+                    <input type="radio" name="isMale" checked="@(!isMale)" @onchange="ChangeIsMale" />
+                    <label for="isMale">Female</label>
+                </div>
+                <div class="col">
+                    <Button ButtonType="create" />
+                </div>
             </div>
         </div>
-        <div class="row col position-center-left">
-            <div class="col col-auto">
-                <input type="radio" name="isMale" checked="@isMale" @onchange="ChangeIsMale" />
-                <label for="isMale">Male</label>
-            </div>
-            <div class="col col-auto">
-                <input type="radio" name="isMale" checked="@(!isMale)" @onchange="ChangeIsMale" />
-                <label for="isMale">Female</label>
-            </div>
-            <div class="col">
-                <Button ButtonType="create" />
-            </div>
-        </div>
-    </div>
-</EditForm>
+    </EditForm>
+</div>
 @code {
 
     [Parameter] public EventCallback<Person> OnValidSubmit { get; set; }

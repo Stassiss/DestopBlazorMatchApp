@@ -23,9 +23,16 @@
 
     .background {
         padding: 20px;
-        margin: 20px;
+        margin: 10px;
         border-radius: 30px;
         background-color: rgba(218, 209, 209, 0.541);
+        min-width: 290px;
+        max-height: 520px;
+    }
+
+    .overflow {
+        overflow-y: auto;
+        max-height: 420px;
     }
 </style>
 <div class="background">
@@ -33,35 +40,37 @@
         <h2>@ListName</h2>
         <div class="dots"></div>
     </div>
-    @if (List == null)
-    {
-        if (NullTemplate != null)
+    <div class="overflow">
+        @if (List == null)
         {
-            @NullTemplate
+            if (NullTemplate != null)
+            {
+                @NullTemplate
+            }
+            else
+            {
+                <p>Loading....</p>
+            }
+        }
+        else if (List.Count == 0)
+        {
+            if (EmptyTemplate != null)
+            {
+                @EmptyTemplate
+            }
+            else
+            {
+                <text>List is empty </text>
+            }
         }
         else
         {
-            <p>Loading....</p>
+            foreach (var element in List)
+            {
+                @ElementTemplate(element);
+            }
         }
-    }
-    else if (List.Count == 0)
-    {
-        if (EmptyTemplate != null)
-        {
-            @EmptyTemplate
-        }
-        else
-        {
-            <text>List is empty </text>
-        }
-    }
-    else
-    {
-        foreach (var element in List)
-        {
-            @ElementTemplate(element);
-        }
-    }
+    </div>
 </div>
 @code {
     [Parameter] public List<TItem> List { get; set; }
