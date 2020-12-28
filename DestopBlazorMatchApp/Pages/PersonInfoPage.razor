@@ -1,0 +1,51 @@
+﻿@page "/details"
+@page "/details/{Id:int}"
+@inject IPersonRepository personRepository
+
+
+@if (SelectedPerson != null)
+{
+    <div>
+        <h1 style="text-align:center">@SelectedPerson.Name Info page</h1>
+        <InfoPageDashbord @ref="ChildContent" SelectedPerson="SelectedPerson" AddLike="AddLikes" RemoveLike="RemoveLike" />
+    </div>
+}
+else
+{
+    <h1 style="text-align:center">Loading......</h1>
+}
+
+
+@code {
+    [Parameter] public int Id { get; set; }
+    public Person SelectedPerson { get; set; }
+    protected InfoPageDashbord ChildContent;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Get  person info from WebApi
+            SelectedPerson = personRepository.PersonInfo(Id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+
+        }
+    }
+    private async void AddLikes(Person personToBeAddedToLikes)
+    {
+
+        personRepository.AddLikes(SelectedPerson, personToBeAddedToLikes);
+        ChildContent.Refresh();
+
+    }
+    private async Task RemoveLike(Person personToBeRemoved)
+    {
+        personRepository.RemoveLikes(SelectedPerson, personToBeRemoved);
+        ChildContent.Refresh();
+    }
+
+
+}

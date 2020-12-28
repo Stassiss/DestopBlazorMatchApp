@@ -39,13 +39,13 @@
         <div @key="Match" class=" row pl-4 pr-4 ">
 
             <div class="col">
-                <p class="font margin text-align-right">@Match.Name</p>
+                <p class="font margin text-align-right">@Match.Male.Name @Match.Male.LastName</p>
             </div>
             <div class="col img-location">
                 <img src="Images/heart.png" class="img-size" />
             </div>
             <div class="col">
-                <p class="font margin text-align-left">@Match.Name</p>
+                <p class="font margin text-align-left">@Match.Female.Name @Match.Female.LastName</p>
             </div>
         </div>
     </div>
@@ -55,6 +55,6 @@
 
 
 @code {
-    [Parameter] public Person Match { get; set; }
+    [Parameter] public MatchDto Match { get; set; }
 
 }

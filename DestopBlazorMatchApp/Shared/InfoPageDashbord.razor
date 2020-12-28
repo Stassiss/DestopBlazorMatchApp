@@ -1,0 +1,80 @@
+﻿@inject IPersonRepository personRepository
+
+<div class="row">
+    <div class="col-4 pl-0 pr-0">
+        <GenericList List="Likes" ListName="Likes">
+            <ElementTemplate Context="person">
+                <PersonTemplate ButtonType="delete" Person="person" OnClick="RemoveLike">
+                </PersonTemplate>
+            </ElementTemplate>
+        </GenericList>
+    </div>
+    <div class="col-4 pl-0 pr-0">
+        <GenericList List="OppositeSexList" ListName="@listName">
+            <ElementTemplate Context="person">
+                <PersonTemplate ButtonType="add" Person="person" OnClick="AddLike">
+                </PersonTemplate>
+            </ElementTemplate>
+        </GenericList>
+    </div>
+
+    <div class="col-4 pl-0 pr-0">
+        <GenericList List="Matches" ListName="Matches">
+            <ElementTemplate Context="person">
+                <PersonTemplate Person="person" ButtonType="none">
+                </PersonTemplate>
+            </ElementTemplate>
+        </GenericList>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Person SelectedPerson { get; set; }
+    [Parameter] public EventCallback<Person> AddLike { get; set; }
+    [Parameter] public EventCallback<Person> RemoveLike { get; set; }
+    private string listName;
+    private List<Person> OppositeSexList;
+    private List<Person> Matches;
+    private List<Person> Likes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListName();
+        LoadLists();
+
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            LoadLists();
+        }
+    }
+
+    public async void Refresh()
+    {
+        LoadLists();
+
+    }
+    private void ListName()
+    {
+        if (SelectedPerson.IsMale)
+        {
+            listName = "Females";
+        }
+        else
+        {
+            listName = "Males";
+        }
+    }
+    private void LoadLists()
+    {
+
+        // Get  person info
+        Likes = personRepository.GetPersonListFromLikes(SelectedPerson);
+        OppositeSexList = personRepository.GetOppositeSexList(SelectedPerson);
+        Matches = personRepository.GetPersonListFromMatchesForInfoPage(SelectedPerson);
+        StateHasChanged();
+    }
+
+}

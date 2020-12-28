@@ -19,8 +19,9 @@
         <div class="col-4 pl-0 pr-0">
             <GenericList List="MatchList" ListName="Matches">
                 <ElementTemplate Context="Match">
-                    <PersonTemplate Match="Match">
-                    </PersonTemplate>
+                    <MatchTemplate Match="Match">
+
+                    </MatchTemplate>
                 </ElementTemplate>
             </GenericList>
         </div>
@@ -39,64 +40,43 @@
 @code {
     private List<Person> MaleList { get; set; }
     private List<Person> FemaleList { get; set; }
-    private List<Person> MatchList { get; set; }
+    private List<MatchDto> MatchList { get; set; }
     protected PersonInputForm ChildComponent;
 
     // Get both gender lists on render
     protected override async Task OnInitializedAsync()
     {
-
-        // Get  personData from WebApi
-        @*MaleList = await personRepository.GetMaleList();
-            FemaleList = await personRepository.GetFemaleList();
-            MatchList = new List<Person>();*@
+        LoadPersonLists();
     }
 
 
     private async void AddNewPerson(Person person)
     {
-        @*try
-            {
-                await personRepository.CreateProject(person);
-
-                // Get  personData from WebApi
-                MaleList = await personRepository.GetMaleList();
-                FemaleList = await personRepository.GetFemaleList();
-                MatchList = await personRepository.GetPersonMatchDTOList();
-
-                ChildComponent.Refresh();
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-            StateHasChanged();*@
+        personRepository.AddPerson(person);
+        ChildComponent.Refresh();
+        StateHasChanged();
+        LoadPersonLists();
     }
 
     private async void DeletePerson(Person person)
     {
-
-        @*try
-            {
-                await personRepository.DeletePerson(person.Id);
-                // Get  personData from WebApi
-                MaleList = await personRepository.GetMaleList();
-                FemaleList = await personRepository.GetFemaleList();
-                MatchList = await personRepository.GetPersonMatchDTOList();
-
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-            StateHasChanged();*@
+        personRepository.DeletePerson(person);
+        LoadPersonLists();
     }
     private void GetPersonInfo(Person person)
     {
 
         NavManager.NavigateTo($"/details/{person.Id}");
     }
+
+    private void LoadPersonLists()
+    {
+        // Get  personData from saved file
+        MaleList = personRepository.LoadPersonList(true);
+        FemaleList = personRepository.LoadPersonList(false);
+        MatchList = personRepository.GetMatchDtoListFromMatches();
+        StateHasChanged();
+    }
+
 
 }
