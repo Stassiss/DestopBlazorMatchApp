@@ -24,5 +24,6 @@ namespace DestopBlazorMatchApp.Repository
         Person PersonInfo(int id);
         void RemoveLikes(Person selcetedPerson, Person personToBeAddedToLikes);
         List<Person> GetPersonListFromMatchesForInfoPage(Person selectedPerson);
+        void ClearLists();
     }
 }

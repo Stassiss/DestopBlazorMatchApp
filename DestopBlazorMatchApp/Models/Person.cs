@@ -32,6 +32,17 @@ namespace DestopBlazorMatchApp.Models
                 _lastName = _lastName.Substring(0, 1).ToUpper() + _lastName.Substring(1);
             }
         }
+        private string _NickName;
+
+        public string NickName
+        {
+            get
+            {
+                return _NickName = _name.Substring(0, 1) + "." + _lastName;
+            }
+
+        }
+
 
         [Required]
         public bool IsMale { get; set; }

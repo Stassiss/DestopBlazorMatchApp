@@ -1,6 +1,8 @@
 ﻿@page "/details"
 @page "/details/{Id:int}"
 @inject IPersonRepository personRepository
+@inject NavigationManager NavManager
+
 
 
 @if (SelectedPerson != null)
@@ -8,7 +10,7 @@
     <div>
 
         <h1 style="text-align:center; margin-bottom:25px;">@SelectedPerson.Name @SelectedPerson.LastName</h1>
-
+        <button class="back-button" @onclick="Back">&laquo;</button>
         <InfoPageDashbord @ref="ChildContent" SelectedPerson="SelectedPerson" AddLike="AddLikes" RemoveLike="RemoveLike" />
     </div>
 }
@@ -47,6 +49,10 @@ else
     {
         personRepository.RemoveLikes(SelectedPerson, personToBeRemoved);
         ChildContent.Refresh();
+    }
+    private void Back()
+    {
+        NavManager.NavigateTo("/");
     }
 
 

@@ -2,14 +2,19 @@
 @inject IPersonRepository personRepository
 @inject NavigationManager NavManager
 
-
+<style>
+    .list-row {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+</style>
 
 <div>
     <h1 id="homePage" style="text-align:center; margin-bottom:25px;"> Home page</h1>
     <div id="input-form">
-        <PersonInputForm @ref="ChildComponent" OnValidSubmit="AddNewPerson" />
+        <PersonInputForm @ref="ChildComponent" OnValidSubmit="AddNewPerson" ClearList="ClearList" />
     </div>
-    <div class="row">
+    <div class="row list-row">
         <div class="col-lg-4 col-md-6 pl-0 pr-0">
             <GenericList List="MaleList" ListName="Male">
                 <ElementTemplate Context="person">
@@ -63,6 +68,11 @@
     private async void DeletePerson(Person person)
     {
         personRepository.DeletePerson(person);
+        LoadPersonLists();
+    }
+    private void ClearList()
+    {
+        personRepository.ClearLists();
         LoadPersonLists();
     }
     private void GetPersonInfo(Person person)

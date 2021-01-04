@@ -4,8 +4,10 @@
     }
 
     .img-size {
-        width: 45px;
-        height: 45px;
+        width: 25px;
+        height: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     .margin {
@@ -13,11 +15,11 @@
     }
 
     .text-align-left {
-        text-align: left;
+        text-align: center;
     }
 
     .text-align-right {
-        text-align: right;
+        text-align: center;
     }
 
     .img-location {
@@ -27,25 +29,29 @@
     }
 
     .backgraund {
-        background-color: lightpink;
         margin: 10px;
-        border: hidden;
-        border-radius: 20px
+        border: gray solid 1px;
+        border-radius: 20px;
     }
+
+        .backgraund .row {
+            justify-content: center;
+            align-items: center;
+        }
 </style>
 
 <div class="container">
     <div class="backgraund">
         <div @key="Match" class=" row pl-4 pr-4 ">
 
-            <div class="col">
-                <p class="font margin text-align-right">@Match.Male.Name @Match.Male.LastName</p>
+            <div>
+                <p class="font margin text-align-right">@Match.Male.NickName</p>
             </div>
-            <div class="col img-location">
+            <div class="img-location heart">
                 <img src="Images/heart.png" class="img-size" />
             </div>
-            <div class="col">
-                <p class="font margin text-align-left">@Match.Female.Name @Match.Female.LastName</p>
+            <div>
+                <p class="font margin text-align-left">@Match.Female.NickName</p>
             </div>
         </div>
     </div>

@@ -95,16 +95,6 @@ namespace DestopBlazorMatchApp.Repository
             like.Id = selcetedPerson.Likes.Count < 1 ? 1 : selcetedPerson.Likes.Max(x => x.Id) + 1;
             like.SelectedPersonId = selcetedPerson.Id;
             like.LikedPersonId = personToBeAddedToLikes.Id;
-            //if (selcetedPerson.IsMale)
-            //{
-            //    like.MaleId = selcetedPerson.Id;
-            //    like.FemaleId = personToBeAddedToLikes.Id;
-            //}
-            //else
-            //{
-            //    like.MaleId = personToBeAddedToLikes.Id;
-            //    like.FemaleId = selcetedPerson.Id;
-            //}
 
             selcetedPerson.Likes.Add(like);
             SavePersonList();
@@ -223,6 +213,12 @@ namespace DestopBlazorMatchApp.Repository
                 matches.Add(matchDto);
             }
             return matches;
+        }
+
+        public void ClearLists()
+        {
+            PersonList.Clear();
+            SavePersonList();
         }
     }
 }

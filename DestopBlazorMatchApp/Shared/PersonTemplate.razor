@@ -1,14 +1,53 @@
-﻿<div class="container">
-    <div @key="Person" class=" row justify-content-start align-items-center">
-        <div class="col" @ondblclick="(()=>OnSelect.InvokeAsync(Person))">
-            <p style="font-size:x-large;margin-top:10px">@Person.Name @Person.LastName</p>
+﻿
+
+<style>
+
+    .name-text {
+        font-size: 30px;
+        text-align: center;
+        padding: 10px;
+        max-width: 250px;
+        overflow: hidden;
+    }
+
+    .template-background {
+        border-radius: 50px;
+        margin: 5px;
+        cursor: pointer;
+        position: relative;
+        right: 0;
+        bottom: 0;
+        transition-property: all;
+        transition-duration: 1s;
+    }
+
+        .template-background button {
+            opacity: 0;
+            transition: opacity ease-in 1s;
+        }
+
+        .template-background:hover {
+            box-shadow: gray -1px -1px, gray 10px 10px;
+            cursor: pointer;
+            position: relative;
+            bottom: 10px;
+            right: 20px;
+        }
+
+            .template-background:hover button {
+                opacity: 1;
+            }
+</style>
+
+<div class="container">
+    <div @key="Person" class=" row align-items-center template-background">
+        <div class=" row col justify-content-center" @ondblclick="(()=>OnSelect.InvokeAsync(Person))">
+            <h5 class="name-text col col-auto">@Person.NickName</h5>
         </div>
-        <div class="col col-auto">
+        <div class="col col-auto justify-content-start">
             @switch (ButtonType.ToLower())
             {
-                case "create":
-                    <Button ButtonType="add" />
-                    break;
+
                 case "add":
                     <Button ButtonType="add" Person="Person" OnClick="OnClick" />
                     break;
@@ -19,11 +58,6 @@
 
                 case "none":
 
-                    break;
-
-                case "add delete":
-                    <Button ButtonType="add" OnClick="OnClick" />
-                    <Button ButtonType="delete" OnClick="OnClick" />
                     break;
 
                 default:

@@ -1,7 +1,7 @@
 ﻿@inject IPersonRepository personRepository
 
 <div class="row">
-    <div class="col-4 pl-0 pr-0">
+    <div class="col-lg-4 col-md-6 pl-0 pr-0">
         <GenericList List="Likes" ListName="Likes">
             <ElementTemplate Context="person">
                 <PersonTemplate ButtonType="delete" Person="person" OnClick="RemoveLike">
@@ -9,7 +9,7 @@
             </ElementTemplate>
         </GenericList>
     </div>
-    <div class="col-4 pl-0 pr-0">
+    <div class="col-lg-4 col-md-6 pl-0 pr-0">
         <GenericList List="OppositeSexList" ListName="@listName">
             <ElementTemplate Context="person">
                 <PersonTemplate ButtonType="add" Person="person" OnClick="AddLike">
@@ -18,7 +18,7 @@
         </GenericList>
     </div>
 
-    <div class="col-4 pl-0 pr-0">
+    <div class="col-lg-4 col-md-6 pl-0 pr-0">
         <GenericList List="Matches" ListName="Matches">
             <ElementTemplate Context="person">
                 <PersonTemplate Person="person" ButtonType="none">
@@ -50,7 +50,6 @@
             LoadLists();
         }
     }
-
     public async void Refresh()
     {
         LoadLists();
