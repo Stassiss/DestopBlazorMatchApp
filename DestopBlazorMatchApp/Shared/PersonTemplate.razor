@@ -23,6 +23,9 @@
 
         .template-background button {
             opacity: 0;
+            font-size: 30px;
+            background: none;
+            border: none;
             transition: opacity ease-in 1s;
         }
 
@@ -31,7 +34,7 @@
             cursor: pointer;
             position: relative;
             bottom: 10px;
-            right: 20px;
+            right: 15px;
         }
 
             .template-background:hover button {
@@ -41,10 +44,10 @@
 
 <div class="container">
     <div @key="Person" class=" row align-items-center template-background">
-        <div class=" row col justify-content-center" @ondblclick="(()=>OnSelect.InvokeAsync(Person))">
+        <div class=" row col justify-content-center" @onclick="(()=>OnSelect.InvokeAsync(Person))">
             <h5 class="name-text col col-auto">@Person.NickName</h5>
         </div>
-        <div class="col col-auto justify-content-start">
+        <div class="col col-auto">
             @switch (ButtonType.ToLower())
             {
 

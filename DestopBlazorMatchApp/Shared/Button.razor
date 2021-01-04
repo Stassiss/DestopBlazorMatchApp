@@ -2,12 +2,12 @@
 
 @if (ButtonType.ToLower() == "delete")
 {
-    <button @ondblclick="(()=>OnClick.InvokeAsync(Person))" class="btn btn-danger btn-sm pr-1 pl-1 ml-1" style="font-size:small" title="Activates on doubleclick">Delete</button>
+    <button @ondblclick="(()=>OnClick.InvokeAsync(Person))" title="DBL Click to remove">&#128465;</button>
 
 }
 else if (ButtonType.ToLower() == "add")
 {
-    <button @onclick="(()=>OnClick.InvokeAsync(Person))" class="btn btn-secondary btn-sm pr-1 pl-1" style="font-size:small">Add</button>
+    <button @onclick="(()=>OnClick.InvokeAsync(Person))" class="btn">&#43;</button>
 
 }
 else if (ButtonType.ToLower() == "create")

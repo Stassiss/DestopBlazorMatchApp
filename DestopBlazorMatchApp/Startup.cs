@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DestopBlazorMatchApp.Data;
 using DestopBlazorMatchApp.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -30,7 +29,6 @@ namespace DestopBlazorMatchApp
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddScoped<IPersonRepository, PersonRepository>();
         }
 

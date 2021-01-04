@@ -1,1 +1,1 @@
-[{"Id":1,"Name":"Janis","LastName":"Janis","NickName":"J.Janis","IsMale":true,"Likes":[{"Id":1,"SelectedPersonId":1,"LikedPersonId":2}]},{"Id":2,"Name":"Ilze","LastName":"Blablabla","NickName":"I.Blablabla","IsMale":false,"Likes":[{"Id":1,"SelectedPersonId":2,"LikedPersonId":1}]}]
+[]

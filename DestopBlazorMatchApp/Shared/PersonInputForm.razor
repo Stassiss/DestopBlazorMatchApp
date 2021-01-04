@@ -35,6 +35,7 @@
         }
 
     .position-center-left {
+        display: flex;
         justify-content: start;
         align-content: center;
     }
@@ -60,23 +61,24 @@
                 </div>
             </div>
             <div class="row col position-center-left">
-                <div class="col col-auto" @onclick="ChangeIsMale">
+                <div class="col col-auto mt-2" @onclick="ChangeIsMale">
                     <input type="radio" name="isMale" checked="@isMale" />
                     <label for="isMale">Male</label>
                 </div>
-                <div class="col col-auto" @onclick="ChangeIsMale">
+                <div class="col col-auto mt-2" @onclick="ChangeIsMale">
                     <input type="radio" name="isMale" checked="@(!isMale)" />
                     <label for="isMale">Female</label>
                 </div>
-                <div class="col">
-                    <button class="btn btn-success btn-sm pr-1 pl-1" style="font-size:small">Add</button>
+                <div class="col" id="input-buttons">
+                    <button type="submit" id="add-person-btn">Add</button>
+                    <button type="button" id="clear-lists-btn" @ondblclick="ClearList">ClearLists</button>
+
                 </div>
             </div>
+
         </div>
     </EditForm>
-    <div class="col position-center-right">
-        <button class="btn btn-danger btn-sm pr-1 pl-1" @onclick="ClearList">ClearLists</button>
-    </div>
+
 
 </div>
 @code {
